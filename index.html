@@ -75,9 +75,9 @@ function rect(x,y,w,h,col){ctx.fillStyle=col;ctx.fillRect(Math.round(x),Math.rou
  const joint=(x0,y0,r,color)=>{target.beginPath();target.arc(x0,y0,r,0,Math.PI*2);target.fillStyle=color;target.fill();target.strokeStyle=ink;target.lineWidth=1;target.stroke()};
  // Grounding shadow and the wind-lifted cape are drawn behind the body.
  target.fillStyle='#0d0b17aa';target.beginPath();target.ellipse(0,-1,22,4,0,0,Math.PI*2);target.fill();
- target.beginPath();target.moveTo(-7,-83);target.quadraticCurveTo(-22,-82,-26+Math.sin(phase*.72)*4,-57);target.lineTo(-31+Math.sin(phase)*7,-17);target.quadraticCurveTo(-20,-19,-9,-29);target.lineTo(-1,-58);target.closePath();
- const cg=target.createLinearGradient(-30,-60,1,-24);cg.addColorStop(0,cape);cg.addColorStop(.55,cape);cg.addColorStop(1,'#321b31');target.fillStyle=cg;target.fill();target.strokeStyle='#211827';target.lineWidth=2;target.stroke();
- target.strokeStyle=gold;target.lineWidth=1.5;target.beginPath();target.moveTo(-22,-69);target.quadraticCurveTo(-26,-48,-26+Math.sin(phase)*5,-25);target.stroke();target.strokeStyle='#dd7868';target.lineWidth=1;target.beginPath();target.moveTo(-25,-63);target.quadraticCurveTo(-27,-45,-29+Math.sin(phase)*5,-28);target.stroke();target.strokeStyle='#b95c5b';target.beginPath();target.moveTo(-16,-68);target.quadraticCurveTo(-18,-49,-20+Math.sin(phase)*4,-35);target.stroke();
+ target.beginPath();target.moveTo(-7,-85);target.quadraticCurveTo(-26,-87,-33+Math.sin(phase*.72)*5,-61);target.quadraticCurveTo(-39+Math.sin(phase)*8,-37,-43+Math.sin(phase)*8,-13);target.quadraticCurveTo(-29,-17,-17,-27);target.quadraticCurveTo(-5,-41,-2,-61);target.closePath();
+ const cg=target.createLinearGradient(-43,-60,1,-18);cg.addColorStop(0,cape);cg.addColorStop(.55,cape);cg.addColorStop(1,'#321b31');target.fillStyle=cg;target.fill();target.strokeStyle='#211827';target.lineWidth=2;target.stroke();
+ target.strokeStyle=gold;target.lineWidth=1.5;target.beginPath();target.moveTo(-24,-72);target.quadraticCurveTo(-31,-48,-38+Math.sin(phase)*7,-21);target.stroke();target.strokeStyle='#dd7868';target.lineWidth=1;target.beginPath();target.moveTo(-25,-63);target.quadraticCurveTo(-27,-45,-29+Math.sin(phase)*5,-28);target.stroke();target.strokeStyle='#b95c5b';target.beginPath();target.moveTo(-16,-68);target.quadraticCurveTo(-18,-49,-20+Math.sin(phase)*4,-35);target.stroke();
  // Back leg, knee, articulated shin, and boot.
  const bx=-4+swing*7,bk=-25+swing*5,ba=-5+swing*13;
  limb(-5,-47,bx,bk,fabric,'#4b4650',10);joint(bx,bk,4,uniform);limb(bx,bk,ba,-4,fabric,'#514c55',8);
@@ -87,14 +87,14 @@ function rect(x,y,w,h,col){ctx.fillStyle=col;ctx.fillRect(Math.round(x),Math.rou
  limb(4,-47,fx,fk,fabric,'#4b4650',11);joint(fx,fk,4.2,uniform);limb(fx,fk,fa,-4,fabric,'#514c55',8.5);
  path([[fa-4,-7],[fa+5,-7],[fa+11,-2],[fa+10,0],[fa-8,0],[fa-10,-2]],'#3a2d31','#17151e',1.4);path([[fa-5,-8],[fa+5,-8],[fa+3,-5],[fa-4,-5]],gold,null);
  // Tunic and waist panels.
- path([[-13,-82],[-8,-88],[5,-90],[13,-81],[12,-55],[17,-43],[5,-38],[-12,-41],[-16,-54]],fabric,'#171720',2);
+ path([[-15,-83],[-11,-90],[3,-92],[14,-87],[17,-76],[14,-53],[19,-43],[6,-38],[-13,-41],[-18,-54]],fabric,'#171720',2.2);
  path([[-10,-82],[-3,-86],[0,-51],[-8,-47],[-13,-55]],house==='Scotia'?'#46523a':house==='Bellator'?'#4c2b34':'#3f354e',null);
  // Asymmetric lapels, worn cloth glints, belt pouch, and the field satchel from the painting.
  path([[-7,-87],[-2,-89],[2,-80],[-1,-74],[-9,-82]],'#e0bd78',gold,1);path([[2,-87],[7,-88],[4,-79],[0,-74]],'#8c344d',gold,1);
  target.strokeStyle='#8c8191';target.lineWidth=.8;target.beginPath();target.moveTo(8,-75);target.lineTo(10,-54);target.moveTo(-7,-72);target.lineTo(-6,-54);target.stroke();
  path([[-14,-51],[-8,-53],[10,-51],[13,-47],[-12,-46]],'#332a34',gold,1);
  path([[-16,-58],[-11,-61],[-7,-58],[-8,-47],[-17,-45],[-20,-49]],'#554039','#211923',1.2);path([[-16,-56],[-10,-58],[-10,-53],[-17,-51]],'#87624c',null);joint(-12,-52,1.5,gold);
- target.strokeStyle=gold;target.lineWidth=1.6;target.beginPath();target.moveTo(-4,-83);target.lineTo(2,-66);target.lineTo(8,-81);target.stroke();
+ target.strokeStyle=gold;target.lineWidth=1.6;target.beginPath();target.moveTo(-4,-84);target.lineTo(1,-66);target.lineTo(9,-83);target.stroke();target.strokeStyle='#d5b371';target.lineWidth=2.2;target.beginPath();target.moveTo(-8,-83);target.lineTo(-1,-79);target.stroke();
  target.beginPath();target.moveTo(-10,-49);target.lineTo(10,-49);target.strokeStyle=gold;target.lineWidth=2;target.stroke();
  joint(1,-58,2.2,'#f0c66f');joint(2,-68,1.8,'#f0c66f');joint(3,-77,1.5,'#f0c66f');
  // Back arm swings at the shoulder and elbow independently.
@@ -107,11 +107,11 @@ function rect(x,y,w,h,col){ctx.fillStyle=col;ctx.fillRect(Math.round(x),Math.rou
  target.strokeStyle='#c9a05c';target.lineWidth=2.5;target.beginPath();target.moveTo(fhX,fhY+1);target.lineTo(fhX+2,fhY-24);target.stroke();joint(fhX+2,fhY-26,3,'#87cfff');target.shadowColor='#8ad9ff';target.shadowBlur=7;joint(fhX+2,fhY-26,1.5,'#e5faff');target.shadowBlur=0;
  // Neck, side-profile face, ear, and swept chestnut hair.
  path([[-4,-89],[-3,-96],[5,-96],[6,-87],[2,-82]],skin,'#352128',1);
- target.beginPath();target.ellipse(2,-102,10,12,-.12,0,Math.PI*2);target.fillStyle=skinPaint;target.fill();target.strokeStyle='#39252a';target.lineWidth=1.4;target.stroke();
- joint(-5,-101,2.7,'#b97960');target.fillStyle=darkSkin;target.beginPath();target.moveTo(9,-103);target.lineTo(14,-100);target.lineTo(9,-98);target.fill();
+ target.beginPath();target.ellipse(2,-102,10.5,13,-.12,0,Math.PI*2);target.fillStyle=skinPaint;target.fill();target.strokeStyle='#39252a';target.lineWidth=1.4;target.stroke();
+ joint(-5,-101,2.7,'#b97960');target.fillStyle=darkSkin;target.beginPath();target.moveTo(9,-104);target.lineTo(15,-100);target.lineTo(9,-98);target.fill();
  target.fillStyle='#28191a';target.fillRect(7,-105,2,1.5);target.fillStyle='#f6dfc6';target.fillRect(7,-105,1,1);
- target.beginPath();target.moveTo(-8,-106);target.quadraticCurveTo(-11,-118,-1,-121);target.quadraticCurveTo(8,-124,13,-116);target.lineTo(9,-113);target.quadraticCurveTo(4,-118,0,-114);target.quadraticCurveTo(-3,-108,-5,-104);target.lineTo(-9,-107);target.closePath();target.fillStyle=hair;target.fill();target.strokeStyle='#171419';target.lineWidth=1.4;target.stroke();
- target.strokeStyle=hairHi;target.lineWidth=1.4;target.beginPath();target.moveTo(-7,-115);target.quadraticCurveTo(0,-121,8,-117);target.moveTo(-5,-111);target.quadraticCurveTo(1,-117,10,-114);target.stroke();target.fillStyle=hair;target.beginPath();target.moveTo(-6,-110);target.quadraticCurveTo(-9,-103,-7,-98);target.quadraticCurveTo(-12,-101,-11,-108);target.closePath();target.fill();
+ target.beginPath();target.moveTo(-9,-105);target.quadraticCurveTo(-14,-112,-10,-119);target.quadraticCurveTo(-4,-128,6,-124);target.quadraticCurveTo(14,-121,15,-114);target.quadraticCurveTo(11,-115,7,-118);target.quadraticCurveTo(4,-111,-2,-109);target.quadraticCurveTo(3,-106,8,-105);target.quadraticCurveTo(2,-101,-5,-104);target.lineTo(-9,-105);target.closePath();target.fillStyle=hair;target.fill();target.strokeStyle='#171419';target.lineWidth=1.4;target.stroke();
+ target.strokeStyle=hairHi;target.lineWidth=1.4;target.beginPath();target.moveTo(-9,-118);target.quadraticCurveTo(-1,-126,9,-121);target.moveTo(-7,-114);target.quadraticCurveTo(1,-121,11,-116);target.moveTo(-5,-111);target.quadraticCurveTo(1,-117,10,-114);target.stroke();target.fillStyle=hair;target.beginPath();target.moveTo(-6,-110);target.quadraticCurveTo(-9,-103,-7,-98);target.quadraticCurveTo(-12,-101,-11,-108);target.closePath();target.fill();
  // Collar, shoulder cape clasp, and protective bracer finish the academy uniform.
  path([[-7,-85],[-2,-89],[4,-87],[1,-80],[-3,-77]],'#79384d',gold,1);
  joint(-8,-80,3.4,gold);joint(-8,-80,1.5,'#ffe39a');target.strokeStyle='#f0cf89';target.lineWidth=.8;target.beginPath();target.moveTo(-3,-83);target.lineTo(1,-78);target.stroke();
@@ -120,7 +120,7 @@ function rect(x,y,w,h,col){ctx.fillStyle=col;ctx.fillRect(Math.round(x),Math.rou
  if(cues.dash){target.globalAlpha=.26;target.fillStyle='#c493fc';target.beginPath();target.moveTo(-18,-91);target.lineTo(-38,-30);target.lineTo(-27,-29);target.lineTo(-7,-82);target.fill();target.globalAlpha=1}
  target.restore();
 }
-function drawCreatorPortrait(now){const el=document.getElementById('creator-preview');if(!el)return;const pc=el.getContext('2d');pc.clearRect(0,0,el.width,el.height);drawArticulatedMage(pc,90,233,heroProfile,now,1,1,.48,true,{})}
+function drawCreatorPortrait(now){const el=document.getElementById('creator-preview');if(!el)return;const pc=el.getContext('2d');pc.clearRect(0,0,el.width,el.height);drawArticulatedMage(pc,90,236,heroProfile,now,1,1.27,.68,true,{})}
 function world(){let g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,'#161326');g.addColorStop(.65,'#302039');g.addColorStop(1,'#4c2e3b');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
 // parallax skyline, academia and slow airships
 for(let i=0;i<22;i++){let x=i*190-(cam*.12%190),h=130+(i*73%112);rect(x,490-h,118,h,'#201a32');rect(x+23,465-h,72,25,'#29203d');for(let j=0;j<3;j++)rect(x+19+j*31,475-h,8,18,'#55406b')}
@@ -151,7 +151,7 @@ if(satchel){let x=satchel.x-cam;ctx.shadowColor='#e9c366';ctx.shadowBlur=13;rect
 // projectiles
 for(const q of projectiles){ctx.shadowColor=q.col;ctx.shadowBlur=19;ctx.fillStyle=q.col;ctx.beginPath();ctx.arc(q.x-cam,q.y,9,0,7);ctx.fill();ctx.fillStyle='#fff4e9';ctx.beginPath();ctx.arc(q.x-cam,q.y,3,0,7);ctx.fill();ctx.shadowBlur=0}
 // Fully articulated academy spellcaster: each limb and the cape animate on shared gait timing.
-let x=p.x-cam,y=p.y;if(p.inv<=0||Math.floor(performance.now()/75)%2===0)drawArticulatedMage(ctx,x,y,heroProfile,performance.now(),p.face,1,clamp(Math.abs(p.vx)/255,0,1),p.on,{attack:p.atk>0,block:p.block,dash:p.dash>0});
+let x=p.x-cam,y=p.y;if(p.inv<=0||Math.floor(performance.now()/75)%2===0)drawArticulatedMage(ctx,x,y,heroProfile,performance.now(),p.face,1.12,clamp(Math.abs(p.vx)/255,0,1),p.on,{attack:p.atk>0,block:p.block,dash:p.dash>0});
 
 for(const q of particles){ctx.globalAlpha=clamp(q.t*2,0,1);rect(q.x-cam,q.y,q.size,q.size,q.col);ctx.globalAlpha=1}}
 function render(t){let dt=Math.min((t-last)/1000||0,.05);last=t;update(dt);ctx.save();if(shake)ctx.translate((Math.random()-.5)*shake,(Math.random()-.5)*shake);world();ctx.restore();drawCreatorPortrait(t);requestAnimationFrame(render)}requestAnimationFrame(render);
