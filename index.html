@@ -64,12 +64,12 @@ for(let n=projectiles.length-1;n>=0;n--){const q=projectiles[n];q.x+=q.vx*dt;q.l
 for(let i=particles.length-1;i>=0;i--){const q=particles[i];q.t-=dt;q.x+=q.vx*dt;q.y+=q.vy*dt;q.vy+=180*dt;if(q.t<=0)particles.splice(i,1)}cam+=(clamp(p.x-500,0,worldW-1280)-cam)*Math.min(1,dt*7);shake=Math.max(0,shake-dt*12);bar('hp',p.hp);bar('mp',p.mp);bar('sp',p.sp);document.getElementById('mapdot').style.left=(12+clamp(p.x/worldW,0,1)*118)+'px';for(let i=0;i<4;i++)document.getElementById('cd'+i).textContent=cds[i]>0?cds[i].toFixed(1)+'s':p.mp<spells[i][2]?'LOW MP':'READY';if(toTimer>0){toTimer-=dt;if(toTimer<=0)document.getElementById('toast').classList.remove('on')}}
 function rect(x,y,w,h,col){ctx.fillStyle=col;ctx.fillRect(Math.round(x),Math.round(y),Math.round(w),Math.round(h))}function drawArticulatedMage(target,x,feetY,profile,now,face=1,scale=1,move=0,onGround=true,cues={}){
  const house=profile.house||'Ingeniarii',palettes={Bellator:['#28242a','#b77b49','#8f2c40'],Ragens:['#28243c','#e2c376','#594181'],Ingeniarii:['#252437','#d5aa60','#84304b'],Umbros:['#191b28','#a49aaf','#37314e'],Scotia:['#2c3025','#c6a86c','#405d3d']},pal=palettes[house]||palettes.Ingeniarii;
- const uniform=pal[0],gold=pal[1];let cape=pal[2];
+ const uniform=pal[0],gold=pal[1],uniformHi=house==='Bellator'?'#5d4646':house==='Scotia'?'#596247':house==='Umbros'?'#45445a':'#51465c';let cape=pal[2];
  if(profile.cloak==='hue-rotate(42deg)')cape='#64418b';else if(profile.cloak==='hue-rotate(105deg) saturate(.8)')cape='#3e673e';else if(profile.cloak==='hue-rotate(180deg)')cape='#28618a';else if(profile.cloak==='none')cape='#8a304b';
  const skin=profile.tone==='sepia(.18) saturate(1.08)'?'#ad714f':profile.tone==='hue-rotate(9deg) saturate(.9)'?'#d1ad99':'#c88968';
  const darkSkin='#8a5848',hair='#35221f',hairHi='#725044',ink='#191722';
  const gait=onGround?Math.max(0,Math.min(1,move)):0,phase=now*.014,swing=Math.sin(phase)*gait,opposite=-swing,bob=onGround?Math.abs(Math.cos(phase))*2.2*gait:0;
- target.save();target.translate(x,feetY-bob);target.scale(face*scale,scale);
+ target.save();target.translate(x,feetY-bob);target.scale(face*scale,scale);const fabric=target.createLinearGradient(-14,-90,14,-38);fabric.addColorStop(0,uniformHi);fabric.addColorStop(.32,uniform);fabric.addColorStop(.72,'#20202d');fabric.addColorStop(1,'#11121c');const skinPaint=target.createLinearGradient(-8,-112,11,-88);skinPaint.addColorStop(0,'#f0c096');skinPaint.addColorStop(.5,skin);skinPaint.addColorStop(1,darkSkin);
  const path=(pts,fill,stroke=ink,lw=1)=>{target.beginPath();target.moveTo(pts[0][0],pts[0][1]);for(let i=1;i<pts.length;i++)target.lineTo(pts[i][0],pts[i][1]);target.closePath();target.fillStyle=fill;target.fill();if(stroke){target.strokeStyle=stroke;target.lineWidth=lw;target.stroke()}};
  const limb=(x1,y1,x2,y2,outer,inner,w)=>{target.lineCap='round';target.lineJoin='round';target.strokeStyle=ink;target.lineWidth=w+3;target.beginPath();target.moveTo(x1,y1);target.lineTo(x2,y2);target.stroke();target.strokeStyle=outer;target.lineWidth=w;target.beginPath();target.moveTo(x1,y1);target.lineTo(x2,y2);target.stroke();if(inner){target.strokeStyle=inner;target.lineWidth=Math.max(1,w*.18);target.beginPath();target.moveTo(x1,y1+1);target.lineTo(x2,y2+1);target.stroke()}};
  const joint=(x0,y0,r,color)=>{target.beginPath();target.arc(x0,y0,r,0,Math.PI*2);target.fillStyle=color;target.fill();target.strokeStyle=ink;target.lineWidth=1;target.stroke()};
@@ -77,39 +77,44 @@ function rect(x,y,w,h,col){ctx.fillStyle=col;ctx.fillRect(Math.round(x),Math.rou
  target.fillStyle='#0d0b17aa';target.beginPath();target.ellipse(0,-1,22,4,0,0,Math.PI*2);target.fill();
  target.beginPath();target.moveTo(-7,-83);target.quadraticCurveTo(-22,-82,-26+Math.sin(phase*.72)*4,-57);target.lineTo(-31+Math.sin(phase)*7,-17);target.quadraticCurveTo(-20,-19,-9,-29);target.lineTo(-1,-58);target.closePath();
  const cg=target.createLinearGradient(-30,-60,1,-24);cg.addColorStop(0,cape);cg.addColorStop(.55,cape);cg.addColorStop(1,'#321b31');target.fillStyle=cg;target.fill();target.strokeStyle='#211827';target.lineWidth=2;target.stroke();
- target.strokeStyle=gold;target.lineWidth=1.2;target.beginPath();target.moveTo(-22,-69);target.quadraticCurveTo(-26,-48,-26+Math.sin(phase)*5,-25);target.stroke();
+ target.strokeStyle=gold;target.lineWidth=1.5;target.beginPath();target.moveTo(-22,-69);target.quadraticCurveTo(-26,-48,-26+Math.sin(phase)*5,-25);target.stroke();target.strokeStyle='#dd7868';target.lineWidth=1;target.beginPath();target.moveTo(-25,-63);target.quadraticCurveTo(-27,-45,-29+Math.sin(phase)*5,-28);target.stroke();target.strokeStyle='#b95c5b';target.beginPath();target.moveTo(-16,-68);target.quadraticCurveTo(-18,-49,-20+Math.sin(phase)*4,-35);target.stroke();
  // Back leg, knee, articulated shin, and boot.
  const bx=-4+swing*7,bk=-25+swing*5,ba=-5+swing*13;
- limb(-5,-47,bx,bk,uniform,'#4b4650',10);joint(bx,bk,4,uniform);limb(bx,bk,ba,-4,uniform,'#514c55',8);
+ limb(-5,-47,bx,bk,fabric,'#4b4650',10);joint(bx,bk,4,uniform);limb(bx,bk,ba,-4,fabric,'#514c55',8);
  path([[ba-4,-7],[ba+4,-7],[ba+10,-2],[ba+9,0],[ba-8,0],[ba-10,-2]],'#312735','#17151e',1.4);path([[ba-4,-8],[ba+5,-8],[ba+3,-5],[ba-4,-5]],gold,null);
  // Front leg moves opposite the rear leg and stays connected at the hip.
  const fx=5+opposite*7,fk=-25+opposite*5,fa=5+opposite*13;
- limb(4,-47,fx,fk,uniform,'#4b4650',11);joint(fx,fk,4.2,uniform);limb(fx,fk,fa,-4,uniform,'#514c55',8.5);
+ limb(4,-47,fx,fk,fabric,'#4b4650',11);joint(fx,fk,4.2,uniform);limb(fx,fk,fa,-4,fabric,'#514c55',8.5);
  path([[fa-4,-7],[fa+5,-7],[fa+11,-2],[fa+10,0],[fa-8,0],[fa-10,-2]],'#3a2d31','#17151e',1.4);path([[fa-5,-8],[fa+5,-8],[fa+3,-5],[fa-4,-5]],gold,null);
  // Tunic and waist panels.
- path([[-11,-82],[-5,-88],[6,-87],[12,-79],[10,-52],[14,-43],[4,-39],[-10,-42],[-14,-52]],uniform,'#171720',1.8);
- path([[-8,-82],[-2,-84],[1,-50],[-7,-47],[-11,-55]],house==='Scotia'?'#46523a':house==='Bellator'?'#4c2b34':'#3f354e',null);
+ path([[-13,-82],[-8,-88],[5,-90],[13,-81],[12,-55],[17,-43],[5,-38],[-12,-41],[-16,-54]],fabric,'#171720',2);
+ path([[-10,-82],[-3,-86],[0,-51],[-8,-47],[-13,-55]],house==='Scotia'?'#46523a':house==='Bellator'?'#4c2b34':'#3f354e',null);
+ // Asymmetric lapels, worn cloth glints, belt pouch, and the field satchel from the painting.
+ path([[-7,-87],[-2,-89],[2,-80],[-1,-74],[-9,-82]],'#e0bd78',gold,1);path([[2,-87],[7,-88],[4,-79],[0,-74]],'#8c344d',gold,1);
+ target.strokeStyle='#8c8191';target.lineWidth=.8;target.beginPath();target.moveTo(8,-75);target.lineTo(10,-54);target.moveTo(-7,-72);target.lineTo(-6,-54);target.stroke();
+ path([[-14,-51],[-8,-53],[10,-51],[13,-47],[-12,-46]],'#332a34',gold,1);
+ path([[-16,-58],[-11,-61],[-7,-58],[-8,-47],[-17,-45],[-20,-49]],'#554039','#211923',1.2);path([[-16,-56],[-10,-58],[-10,-53],[-17,-51]],'#87624c',null);joint(-12,-52,1.5,gold);
  target.strokeStyle=gold;target.lineWidth=1.6;target.beginPath();target.moveTo(-4,-83);target.lineTo(2,-66);target.lineTo(8,-81);target.stroke();
  target.beginPath();target.moveTo(-10,-49);target.lineTo(10,-49);target.strokeStyle=gold;target.lineWidth=2;target.stroke();
  joint(1,-58,2.2,'#f0c66f');joint(2,-68,1.8,'#f0c66f');joint(3,-77,1.5,'#f0c66f');
  // Back arm swings at the shoulder and elbow independently.
  const beX=-15+swing*4,beY=-62+Math.abs(swing)*1,bhX=-13+swing*8,bhY=-48+Math.max(0,swing)*3;
- limb(-9,-78,beX,beY,uniform,'#514554',8);joint(beX,beY,3.4,uniform);limb(beX,beY,bhX,bhY,skin,darkSkin,6);joint(bhX,bhY,3,skin);
+ limb(-9,-78,beX,beY,fabric,'#514554',8);joint(beX,beY,3.4,uniform);limb(beX,beY,bhX,bhY,skin,darkSkin,6);joint(bhX,bhY,3,skin);
  // Front shoulder and forearm follow the same gait; combat cues extend the hand.
  const attack=!!cues.attack,feX=attack?22:13-opposite*4,feY=attack?-72:-61,fhX=attack?34:14-opposite*7,fhY=attack?-66:-48+Math.max(0,opposite)*3;
- limb(8,-78,feX,feY,uniform,'#66515a',8.5);joint(feX,feY,3.5,uniform);limb(feX,feY,fhX,fhY,skin,darkSkin,6);joint(fhX,fhY,3.2,skin);
+ limb(8,-78,feX,feY,fabric,'#66515a',8.5);joint(feX,feY,3.5,uniform);limb(feX,feY,fhX,fhY,skin,darkSkin,6);joint(fhX,fhY,3.2,skin);
  // Brass wand and a small magical focus sit in the lead hand.
  target.strokeStyle='#c9a05c';target.lineWidth=2.5;target.beginPath();target.moveTo(fhX,fhY+1);target.lineTo(fhX+2,fhY-24);target.stroke();joint(fhX+2,fhY-26,3,'#87cfff');target.shadowColor='#8ad9ff';target.shadowBlur=7;joint(fhX+2,fhY-26,1.5,'#e5faff');target.shadowBlur=0;
  // Neck, side-profile face, ear, and swept chestnut hair.
  path([[-4,-89],[-3,-96],[5,-96],[6,-87],[2,-82]],skin,'#352128',1);
- target.beginPath();target.ellipse(2,-102,10,12,-.12,0,Math.PI*2);target.fillStyle=skin;target.fill();target.strokeStyle='#39252a';target.lineWidth=1.4;target.stroke();
+ target.beginPath();target.ellipse(2,-102,10,12,-.12,0,Math.PI*2);target.fillStyle=skinPaint;target.fill();target.strokeStyle='#39252a';target.lineWidth=1.4;target.stroke();
  joint(-5,-101,2.7,'#b97960');target.fillStyle=darkSkin;target.beginPath();target.moveTo(9,-103);target.lineTo(14,-100);target.lineTo(9,-98);target.fill();
  target.fillStyle='#28191a';target.fillRect(7,-105,2,1.5);target.fillStyle='#f6dfc6';target.fillRect(7,-105,1,1);
- target.beginPath();target.moveTo(-8,-106);target.quadraticCurveTo(-11,-118,-1,-121);target.quadraticCurveTo(9,-123,12,-115);target.lineTo(8,-113);target.quadraticCurveTo(2,-118,-3,-112);target.lineTo(-5,-105);target.lineTo(-8,-106);target.closePath();target.fillStyle=hair;target.fill();target.strokeStyle='#171419';target.lineWidth=1.4;target.stroke();
- target.strokeStyle=hairHi;target.lineWidth=1;target.beginPath();target.moveTo(-6,-115);target.quadraticCurveTo(1,-120,8,-116);target.stroke();
+ target.beginPath();target.moveTo(-8,-106);target.quadraticCurveTo(-11,-118,-1,-121);target.quadraticCurveTo(8,-124,13,-116);target.lineTo(9,-113);target.quadraticCurveTo(4,-118,0,-114);target.quadraticCurveTo(-3,-108,-5,-104);target.lineTo(-9,-107);target.closePath();target.fillStyle=hair;target.fill();target.strokeStyle='#171419';target.lineWidth=1.4;target.stroke();
+ target.strokeStyle=hairHi;target.lineWidth=1.4;target.beginPath();target.moveTo(-7,-115);target.quadraticCurveTo(0,-121,8,-117);target.moveTo(-5,-111);target.quadraticCurveTo(1,-117,10,-114);target.stroke();target.fillStyle=hair;target.beginPath();target.moveTo(-6,-110);target.quadraticCurveTo(-9,-103,-7,-98);target.quadraticCurveTo(-12,-101,-11,-108);target.closePath();target.fill();
  // Collar, shoulder cape clasp, and protective bracer finish the academy uniform.
  path([[-7,-85],[-2,-89],[4,-87],[1,-80],[-3,-77]],'#79384d',gold,1);
- joint(-8,-80,3,gold);joint(-8,-80,1.2,'#ffe39a');
+ joint(-8,-80,3.4,gold);joint(-8,-80,1.5,'#ffe39a');target.strokeStyle='#f0cf89';target.lineWidth=.8;target.beginPath();target.moveTo(-3,-83);target.lineTo(1,-78);target.stroke();
  target.strokeStyle=gold;target.lineWidth=1.5;target.beginPath();target.moveTo(10,-58);target.lineTo(16,-55);target.stroke();
  if(cues.block){target.strokeStyle='#8fc4ff';target.lineWidth=2.5;target.beginPath();target.arc(9,-68,22,-1.25,1.2);target.stroke()}
  if(cues.dash){target.globalAlpha=.26;target.fillStyle='#c493fc';target.beginPath();target.moveTo(-18,-91);target.lineTo(-38,-30);target.lineTo(-27,-29);target.lineTo(-7,-82);target.fill();target.globalAlpha=1}
