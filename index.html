@@ -80,12 +80,15 @@ function rect(x,y,w,h,col){ctx.fillStyle=col;ctx.fillRect(Math.round(x),Math.rou
  target.strokeStyle=gold;target.lineWidth=1.5;target.beginPath();target.moveTo(-24,-72);target.quadraticCurveTo(-31,-48,-38+Math.sin(phase)*7,-21);target.stroke();target.strokeStyle='#dd7868';target.lineWidth=1;target.beginPath();target.moveTo(-25,-63);target.quadraticCurveTo(-27,-45,-29+Math.sin(phase)*5,-28);target.stroke();target.strokeStyle='#b95c5b';target.beginPath();target.moveTo(-16,-68);target.quadraticCurveTo(-18,-49,-20+Math.sin(phase)*4,-35);target.stroke();
  // Back leg, knee, articulated shin, and boot.
  const bx=-4+swing*7,bk=-25+swing*5,ba=-5+swing*13;
- limb(-5,-47,bx,bk,fabric,'#4b4650',10);joint(bx,bk,4,uniform);limb(bx,bk,ba,-4,fabric,'#514c55',8);
+ limb(-5,-47,bx,bk,fabric,'#4b4650',12);joint(bx,bk,4,uniform);limb(bx,bk,ba,-4,fabric,'#514c55',9.5);
  path([[ba-4,-7],[ba+4,-7],[ba+10,-2],[ba+9,0],[ba-8,0],[ba-10,-2]],'#312735','#17151e',1.4);path([[ba-4,-8],[ba+5,-8],[ba+3,-5],[ba-4,-5]],gold,null);
  // Front leg moves opposite the rear leg and stays connected at the hip.
  const fx=5+opposite*7,fk=-25+opposite*5,fa=5+opposite*13;
- limb(4,-47,fx,fk,fabric,'#4b4650',11);joint(fx,fk,4.2,uniform);limb(fx,fk,fa,-4,fabric,'#514c55',8.5);
+ limb(4,-47,fx,fk,fabric,'#4b4650',13);joint(fx,fk,4.2,uniform);limb(fx,fk,fa,-4,fabric,'#514c55',10);
  path([[fa-4,-7],[fa+5,-7],[fa+11,-2],[fa+10,0],[fa-8,0],[fa-10,-2]],'#3a2d31','#17151e',1.4);path([[fa-5,-8],[fa+5,-8],[fa+3,-5],[fa-4,-5]],gold,null);
+ // Back arm swings at the shoulder and elbow independently.
+ const beX=-15+swing*4,beY=-62+Math.abs(swing)*1,bhX=-13+swing*8,bhY=-48+Math.max(0,swing)*3;
+ limb(-9,-78,beX,beY,fabric,'#514554',9.5);joint(beX,beY,3.4,uniform);limb(beX,beY,bhX,bhY,skinPaint,darkSkin,7);joint(bhX,bhY,3,skin);
  // Tunic and waist panels.
  path([[-15,-83],[-11,-90],[3,-92],[14,-87],[17,-76],[14,-53],[19,-43],[6,-38],[-13,-41],[-18,-54]],fabric,'#171720',2.2);
  path([[-10,-82],[-3,-86],[0,-51],[-8,-47],[-13,-55]],house==='Scotia'?'#46523a':house==='Bellator'?'#4c2b34':'#3f354e',null);
@@ -97,12 +100,9 @@ function rect(x,y,w,h,col){ctx.fillStyle=col;ctx.fillRect(Math.round(x),Math.rou
  target.strokeStyle=gold;target.lineWidth=1.6;target.beginPath();target.moveTo(-4,-84);target.lineTo(1,-66);target.lineTo(9,-83);target.stroke();target.strokeStyle='#d5b371';target.lineWidth=2.2;target.beginPath();target.moveTo(-8,-83);target.lineTo(-1,-79);target.stroke();
  target.beginPath();target.moveTo(-10,-49);target.lineTo(10,-49);target.strokeStyle=gold;target.lineWidth=2;target.stroke();
  joint(1,-58,2.2,'#f0c66f');joint(2,-68,1.8,'#f0c66f');joint(3,-77,1.5,'#f0c66f');
- // Back arm swings at the shoulder and elbow independently.
- const beX=-15+swing*4,beY=-62+Math.abs(swing)*1,bhX=-13+swing*8,bhY=-48+Math.max(0,swing)*3;
- limb(-9,-78,beX,beY,fabric,'#514554',8);joint(beX,beY,3.4,uniform);limb(beX,beY,bhX,bhY,skin,darkSkin,6);joint(bhX,bhY,3,skin);
  // Front shoulder and forearm follow the same gait; combat cues extend the hand.
  const attack=!!cues.attack,feX=attack?22:13-opposite*4,feY=attack?-72:-61,fhX=attack?34:14-opposite*7,fhY=attack?-66:-48+Math.max(0,opposite)*3;
- limb(8,-78,feX,feY,fabric,'#66515a',8.5);joint(feX,feY,3.5,uniform);limb(feX,feY,fhX,fhY,skin,darkSkin,6);joint(fhX,fhY,3.2,skin);
+ limb(8,-78,feX,feY,fabric,'#66515a',10);joint(feX,feY,3.5,uniform);limb(feX,feY,fhX,fhY,skinPaint,darkSkin,7);joint(fhX,fhY,3.2,skin);
  // Brass wand and a small magical focus sit in the lead hand.
  target.strokeStyle='#c9a05c';target.lineWidth=2.5;target.beginPath();target.moveTo(fhX,fhY+1);target.lineTo(fhX+2,fhY-24);target.stroke();joint(fhX+2,fhY-26,3,'#87cfff');target.shadowColor='#8ad9ff';target.shadowBlur=7;joint(fhX+2,fhY-26,1.5,'#e5faff');target.shadowBlur=0;
  // Neck, side-profile face, ear, and swept chestnut hair.
@@ -113,7 +113,7 @@ function rect(x,y,w,h,col){ctx.fillStyle=col;ctx.fillRect(Math.round(x),Math.rou
  target.beginPath();target.moveTo(-9,-105);target.quadraticCurveTo(-14,-112,-10,-119);target.quadraticCurveTo(-4,-128,6,-124);target.quadraticCurveTo(14,-121,15,-114);target.quadraticCurveTo(11,-115,7,-118);target.quadraticCurveTo(4,-111,-2,-109);target.quadraticCurveTo(3,-106,8,-105);target.quadraticCurveTo(2,-101,-5,-104);target.lineTo(-9,-105);target.closePath();target.fillStyle=hair;target.fill();target.strokeStyle='#171419';target.lineWidth=1.4;target.stroke();
  target.strokeStyle=hairHi;target.lineWidth=1.4;target.beginPath();target.moveTo(-9,-118);target.quadraticCurveTo(-1,-126,9,-121);target.moveTo(-7,-114);target.quadraticCurveTo(1,-121,11,-116);target.moveTo(-5,-111);target.quadraticCurveTo(1,-117,10,-114);target.stroke();target.fillStyle=hair;target.beginPath();target.moveTo(-6,-110);target.quadraticCurveTo(-9,-103,-7,-98);target.quadraticCurveTo(-12,-101,-11,-108);target.closePath();target.fill();
  // Collar, shoulder cape clasp, and protective bracer finish the academy uniform.
- path([[-7,-85],[-2,-89],[4,-87],[1,-80],[-3,-77]],'#79384d',gold,1);
+ path([[-9,-86],[-3,-92],[4,-89],[2,-81],[-4,-77]],'#79384d',gold,1.3);path([[-10,-84],[-15,-79],[-11,-71],[-6,-78]],'#7f394d',gold,1);
  joint(-8,-80,3.4,gold);joint(-8,-80,1.5,'#ffe39a');target.strokeStyle='#f0cf89';target.lineWidth=.8;target.beginPath();target.moveTo(-3,-83);target.lineTo(1,-78);target.stroke();
  target.strokeStyle=gold;target.lineWidth=1.5;target.beginPath();target.moveTo(10,-58);target.lineTo(16,-55);target.stroke();
  if(cues.block){target.strokeStyle='#8fc4ff';target.lineWidth=2.5;target.beginPath();target.arc(9,-68,22,-1.25,1.2);target.stroke()}
