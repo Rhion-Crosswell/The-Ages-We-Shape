@@ -5,3 +5,25 @@
 .brand,.vitals,.quest{transform-origin:top left}.house-mark{transform-origin:top center}.mini,.loadout{transform-origin:top right}.spell-details{transform-origin:bottom right}.spells{transform-origin:bottom left}.help{transform-origin:bottom right}.toast{transform-origin:center top}.mobile{transform-origin:bottom center}
 @media(max-width:760px){.loadout{transform:none}}
 
+.creator{width:min(680px,94%);padding:22px 26px 18px;border:2px solid #c69c5d;background:linear-gradient(145deg,#211a2bed,#15111eeF);box-shadow:0 0 0 3px #332439,0 18px 75px #06040bd9;text-align:left}
+.creator h1{text-align:center;color:#f5d57f;font:700 clamp(20px,3vw,29px) Georgia,serif;letter-spacing:.12em;margin:5px 0 17px;text-shadow:0 2px 0 #4a2f43}
+.creator .eyebrow{text-align:center}
+.creator-grid{display:grid;grid-template-columns:minmax(170px,240px) 1fr;gap:25px;align-items:center}
+.creator-art{height:240px;display:grid;place-items:end center;position:relative;overflow:hidden;border:1px solid #a9824c;background:radial-gradient(ellipse at 50% 80%,#74523f 0, #34253a 52%,#151522 100%);box-shadow:inset 0 0 28px #0a0715}
+.creator-art img{height:92%;max-width:95%;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 5px 8px #08050c)}
+.creator-art span{position:absolute;left:0;right:0;bottom:0;padding:5px;text-align:center;background:#100d19c9;color:#efd184;font:9px 'DM Mono',monospace;letter-spacing:.12em}
+.creator-fields{display:grid;gap:9px}
+.creator-fields label{display:grid;grid-template-columns:92px 1fr;align-items:center;gap:8px;color:#e3c27e;font:9px 'DM Mono',monospace;letter-spacing:.1em}
+.creator-fields input,.creator-fields select{width:100%;min-width:0;padding:8px 9px;border:1px solid #745943;background:#17131f;color:#f3e9d6;font:12px Georgia,serif}
+.creator-fields .btn{margin-top:5px}
+.creator-hint{text-align:center;margin:13px 0 0!important;font:10px Georgia,serif!important}
+@media(max-width:560px){.creator{padding:16px}.creator-grid{grid-template-columns:105px 1fr;gap:12px}.creator-art{height:205px}.creator-fields label{grid-template-columns:1fr;gap:3px}.creator-fields input,.creator-fields select{padding:6px}.creator-hint{font-size:8px!important}}
+
+.shade{z-index:10;background:rgba(8,6,12,.38)}
+
+.house-description{min-height:42px;margin:1px 0 2px;padding:8px 10px;border-left:2px solid #c89e60;background:linear-gradient(90deg,#9b78451b,transparent);color:#d5c5ad;font:11px/1.45 Georgia,serif}
+
+.creator-art img,.creator-art canvas{width:auto;height:92%;max-width:95%;object-fit:contain;filter:drop-shadow(0 5px 8px #08050c)}
+
+.fixed-appearance{margin:0;padding:8px;border:1px solid #806546;background:#241b2be8;color:#efd184;text-align:center;font:9px "DM Mono",monospace;letter-spacing:.11em}
+
